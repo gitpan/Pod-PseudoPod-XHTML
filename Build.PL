@@ -1,23 +1,48 @@
+
 use strict;
 use warnings;
-use Module::Build;
 
-my $builder = Module::Build->new(
+use Module::Build 0.3601;
 
-    module_name         => 'Pod::PseudoPod::XHTML',
 
-    add_to_cleanup      => [ 'Pod-PseudoPod-XHTML-*', '_build', 'Build', 'MYMETA.yml' ],
-
-    create_makefile_pl  => 'traditional',
-
-    build_requires      => { 'Test::More' => 0, 'Test::NoWarnings' => 0 },
-    requires            => { 'Pod::PseudoPod::HTML' => 0 },
-
-    dist_author         => q{Alan Young <alansyoungiii@gmail.com>},
-    dist_version_from   => 'lib/Pod/PseudoPod/XHTML.pm',
-    dist_abstract       => 'Generate valid XHTML from pseudopod',
-    license             => 'perl',
-
+my %module_build_args = (
+  "build_requires" => {
+    "English" => 0,
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "Module::Build" => "0.3601",
+    "Path::Class" => 0,
+    "Scalar::Util" => 0,
+    "Test::More" => "0.94",
+    "Test::NoWarnings" => 0,
+    "Test::Perl::Critic::Progressive" => 0,
+    "Try::Tiny" => 0,
+    "perl" => "5.004"
+  },
+  "configure_requires" => {
+    "Module::Build" => "0.3601"
+  },
+  "dist_abstract" => "format PseudoPod as valid XHTML",
+  "dist_author" => [
+    "Alan Young <harleypig\@gmail.com>"
+  ],
+  "dist_name" => "Pod-PseudoPod-XHTML",
+  "dist_version" => "1.02",
+  "license" => "perl",
+  "module_name" => "Pod::PseudoPod::XHTML",
+  "recommends" => {},
+  "recursive_test_files" => 1,
+  "requires" => {
+    "Carp" => 0,
+    "Pod::PseudoPod::HTML" => 0,
+    "base" => 0,
+    "strict" => 0,
+    "warnings" => 0
+  },
+  "script_files" => []
 );
 
-$builder->create_build_script();
+
+my $build = Module::Build->new(%module_build_args);
+
+$build->create_build_script;
